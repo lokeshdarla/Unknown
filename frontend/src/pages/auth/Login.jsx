@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 import Alert from '../../Components/Alert/Alert';
 import { useNavigate } from 'react-router-dom'
 import { AuthPage } from '../../Components/GoogleAuth/GoogleAuth';
@@ -17,8 +18,7 @@ function LoginSection() {
       if (!username.trim() || !password.trim()) {
         return;
       }
-
-
+  
       const response = await fetch(loginUrl, {
         method: 'POST',
         headers: {
@@ -29,13 +29,17 @@ function LoginSection() {
           password: password,
         }),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
+        console.log('Data obtained:', data);
+        const decodedAccessToken = jwtDecode(data.access_token);
+        localStorage.setItem("accessToken",data.access_token)
         setAlert({ type: 'success', message: 'Login successful!' });
         setUsername('');
         setPassword('');
-      navigation('/')
+  
+        navigation('/');
       } else {
         const errorData = await response.json();
         setAlert({ type: 'error', message: 'Failed to log in. Please try again.' });
@@ -49,6 +53,7 @@ function LoginSection() {
       setPassword('');
     }
   };
+  
 
   return (
     <section className="">

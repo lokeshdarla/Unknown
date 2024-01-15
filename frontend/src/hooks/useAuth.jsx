@@ -22,6 +22,7 @@ export default function useAuth() {
       }
 
       setUser(decodedAccessToken);
+      console.log(decodedAccessToken);
     } catch (error) {
       setError('Error fetching user data: ' + error);
     } finally {

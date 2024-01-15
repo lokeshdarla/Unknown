@@ -41,11 +41,16 @@ class postBase(BaseModel):
 class PostCreate(postBase):
     content: str
     published: bool = True
+    image_id: Optional [int]
     
 class PostCreateOut(postBase):
     content: str
     published: bool = True
     owner_id:int
+  
+class postImageOut(BaseModel):
+    image_id:int
+    image:bytes
     
 
 class PostUpdate(postBase):
@@ -54,10 +59,12 @@ class PostUpdate(postBase):
     published: bool = True
 
 class PostOut(BaseModel):
-    id:int
+    id: int
     content: str
-    created_at:datetime
-    owner:UserOut
+    created_at: datetime # Adjust the type based on your specific requirements
+    username: str
+    image: Optional[postImageOut]  # Make the image attribute optional
+    votes: int
 
 class PostView(BaseModel):
     Post:PostOut
@@ -67,3 +74,5 @@ class PostView(BaseModel):
 class Vote(BaseModel):
     post_id:int
     dir:conint(le=1)
+
+   

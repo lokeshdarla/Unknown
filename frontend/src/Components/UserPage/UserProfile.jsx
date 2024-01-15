@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import avatar1 from '../Images/avatar1.png';
 import MyPosts from './myPosts';
+import useAuth from '../../hooks/useAuth';
 
 export default function UserProfile() {
-  const [username, setUsername] = useState('Lokesh Naga Sai');
   const [bio, setBio] = useState('Coffee to Code');
   const [isEditing, setIsEditing] = useState(false);
+  const { user, logout } = useAuth();
 
   const inputRef = useRef(null);
 
@@ -21,7 +22,6 @@ export default function UserProfile() {
 
   const handleSave = () => {
     setIsEditing(false);
-    // You can perform any save/update action here
   };
 
   const handleInputChange = (event) => {
@@ -46,7 +46,7 @@ export default function UserProfile() {
               : ''
           }`}
           name="username"
-          value={username}
+          value={user.username}
           onChange={handleInputChange}
           readOnly={!isEditing}
         />

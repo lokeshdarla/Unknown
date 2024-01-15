@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { AudioLines } from 'lucide-react';
 import DropdownButton from './userDropdown';
-
 export default function Header() {
     return (
         <header className="">

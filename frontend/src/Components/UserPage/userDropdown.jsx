@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import avatar1 from '../Images/avatar1.png';
-import avatar3 from '../Images/avatar3.png';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import  useAuth  from "../../hooks/useAuth";
 
 const DropdownButton = () => {
+  const { user, logout } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  if(!user)
+  {
+    return(
+      <>
+      <h1>Please Authenticate yourself</h1>
+      </>
+    )
+  }
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -20,10 +30,10 @@ const DropdownButton = () => {
         type="button"
         onClick={toggleDropdown}
       >
-       <div className="flex items-center space-x-4">
-        <img className="w-7 h-7 rounded-full" src={avatar1} alt="Author Avatar" />
-        <span className="font-medium">Lokesh Naga Sai</span>
-      </div>
+        <div className="flex items-center space-x-4">
+          <img className="w-7 h-7 rounded-full" src={avatar1} alt="Author Avatar" />
+          <span className="font-medium">{user.username}</span>
+        </div>
       </button>
 
       {isDropdownOpen && (
@@ -33,9 +43,9 @@ const DropdownButton = () => {
         >
           <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
             <li>
-            <Link to="/userprofile" className="block px-4 py-2 hover:bg-gray-100">
-              Profile
-            </Link>
+              <Link to="/userprofile" className="block px-4 py-2 hover:bg-gray-100">
+                Profile
+              </Link>
             </li>
             <li>
               <Link to="/auth" className="block px-4 py-2 hover:bg-gray-100">
