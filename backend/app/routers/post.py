@@ -21,8 +21,6 @@ async def upload_image(image: UploadFile = File(...), db: Session = Depends(get_
     try:
         contents = await image.read()
         
-        # Process and save the image in the database
-        
         db_image = models.PostImage(image=contents)
         db.add(db_image)
         db.commit()

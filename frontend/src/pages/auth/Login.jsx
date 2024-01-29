@@ -13,11 +13,13 @@ function LoginSection() {
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState(null);
   const loginUrl = 'http://127.0.0.1:8000/auth';
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       if (!username.trim() || !password.trim()) {
         return;
       }
+      console.log('message about to sent')
   
       const response = await fetch(loginUrl, {
         method: 'POST',
@@ -29,7 +31,6 @@ function LoginSection() {
           password: password,
         }),
       });
-  
       if (response.ok) {
         const data = await response.json();
         console.log('Data obtained:', data);
@@ -68,7 +69,7 @@ function LoginSection() {
             </h1>
            
             {alert && <Alert type={alert.type} message={alert.message} />}
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleLogin}>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
                   Email Address
@@ -100,7 +101,7 @@ function LoginSection() {
               </div>
               <button
                 type="submit"
-                onClick={handleLogin}
+                // onClick={handleLogin}
                 className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-5 py-3 text-center mb-2"
               >
                 Continue

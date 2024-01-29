@@ -12,14 +12,25 @@ const DropdownButton = () => {
   {
     return(
       <>
-      <h1>Please Authenticate yourself</h1>
-      </>
+      <Link
+        className='py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200'
+        to="/auth"
+      >
+        Login
+      </Link>
+    </>
+    
     )
   }
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+
+  const handleLogout=()=>{
+    localStorage.removeItem("accessToken")
+    navigate("/auth");
+  }
 
   return (
     <div className="relative inline-block">
@@ -48,9 +59,9 @@ const DropdownButton = () => {
               </Link>
             </li>
             <li>
-              <Link to="/auth" className="block px-4 py-2 hover:bg-gray-100">
+              <button onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-100 w-full text-start">
                 Log Out
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

@@ -46,7 +46,7 @@ export default function UserProfile() {
               : ''
           }`}
           name="username"
-          value={user.username}
+          value="lokesh"
           onChange={handleInputChange}
           readOnly={!isEditing}
         />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import avatar1 from '../Images/avatar1.png';
-import avatar3 from '../Images/avatar3.png';
 import MyForm from '../BlogInput/BlogPost';
 
 
@@ -43,8 +42,6 @@ const Card = ({ post }) => (
     )}
   </article>
 );
-
-
 
 const BlogSection = (props) => {
   const [blogPosts, setBlogPosts] = useState([]);
