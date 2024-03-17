@@ -15,11 +15,16 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     username:str
     password:str
+    imageURL:str
+    
+class UserImageUpdate(BaseModel):
+    imageURL:str
 
 class UserOut(BaseModel):
     id: int
     username: str
     created_at: datetime
+    imageURL :str
 
 
 class UserLogin(BaseModel):
@@ -63,6 +68,7 @@ class PostOut(BaseModel):
     content: str
     created_at: datetime # Adjust the type based on your specific requirements
     username: str
+    userProfile:str
     image: Optional[postImageOut]  # Make the image attribute optional
     votes: int
 

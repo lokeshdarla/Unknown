@@ -43,6 +43,7 @@ def post_out(post: models.Post, image: models.PostImage, user: models.User, vote
         content=post.content,
         created_at=post.created_at.strftime("%Y-%m-%d %H:%M:%S"),
         username=user.username,
+        userProfile=user.imageURL,
         image=image_data,
         votes=votes
     )

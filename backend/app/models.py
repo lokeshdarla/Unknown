@@ -2,12 +2,6 @@ from sqlalchemy import Column, String, Boolean, Integer, TIMESTAMP, text, Foreig
 from sqlalchemy.orm import relationship
 from .database import Base
 
-class ProfileImage(Base):
-    __tablename__ = "profile_images"
-
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    image = Column(LargeBinary)
-
 class User(Base):
     __tablename__ = "users"
 
@@ -15,7 +9,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     username = Column(String, nullable=False, unique=True)
     password = Column(String)
-    image_id = Column(Integer, unique=True)  # Assuming this links to a ProfileImage
+    imageURL = Column(String)
     created_at = Column(TIMESTAMP, nullable=False, server_default=text('now()'))
     
 class PostImage(Base):

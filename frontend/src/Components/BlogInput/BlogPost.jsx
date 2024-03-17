@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import avatar1 from '../Images/avatar1.png';
 import axios from 'axios';
 
 const MyForm = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const accessToken = localStorage.getItem('accessToken');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -72,39 +73,39 @@ const MyForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='flex items-center justify-center flex-col'>
-      <div className='flex items-center lg:items-start justify-center flex-col lg:flex-row'>
-        <div className='flex gap-2 justify-center'>
-          <img src={avatar1} className='h-9 w-9 rounded-full' alt='Preview' />
+    <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center'>
+      <div className='flex flex-col items-center justify-center lg:items-start lg:flex-row'>
+        <div className='flex justify-center gap-2'>
+          <img src={avatar1} className='rounded-full h-9 w-9' alt='Preview' />
           <textarea
-            className="text-xl px-5 py-2 focus:outline-none text-gray-500 w-auto resize-none overflow-hidden lg:w-96"
+            className="w-auto px-5 py-2 overflow-hidden text-xl text-gray-500 resize-none focus:outline-none lg:w-96"
             placeholder="What is happening?!"
             rows="1"
             value={inputValue}
             onChange={handleInputChange}
           />
         </div>
-        <div className='m-2 flex items-center justify-end gap-2 w-auto'>
-          <label htmlFor='fileInput' className='px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xl pointer cursor-pointer'>
+        <div className='flex items-center justify-end w-auto gap-2 m-2'>
+          <label htmlFor='fileInput' className='px-4 py-2 text-xl text-blue-600 rounded-full cursor-pointer bg-blue-50 pointer'>
             +
             <input type='file' id='fileInput' style={{ display: 'none' }} onChange={handleFileChange} />
           </label>
           {selectedImage && (
             <button
               type='button'
-              className='px-4 py-2 bg-red-50 text-red-600 rounded-full pointer cursor-pointer'
+              className='px-4 py-2 text-red-600 rounded-full cursor-pointer bg-red-50 pointer'
               onClick={removeImage}
             >
               Remove
             </button>
           )}
-          <button type='submit' className='px-4 py-2 bg-blue-50 text-blue-700 rounded-md'>Post</button>
+          <button type='submit' className='px-4 py-2 text-blue-700 rounded-md bg-blue-50'>Post</button>
         </div>
       </div>
       {selectedImage && (
         <img
           src={URL.createObjectURL(selectedImage)}
-          className='max-w-96 h-44 lg:h-60 l rounded-lg'
+          className='rounded-lg max-w-96 h-44 lg:h-60 l'
           alt='Preview'
         />
       )}

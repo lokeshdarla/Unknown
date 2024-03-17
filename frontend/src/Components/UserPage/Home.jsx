@@ -28,10 +28,10 @@ const formatTimestamp = (timestamp) => {
 };
 
 const Card = ({ post }) => (
-  <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md mb-3">
-    <div className="flex justify-between items-center mb-5 text-gray-500">
+  <article className="p-6 mb-3 bg-white border border-gray-200 rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-5 text-gray-500">
       <div className="flex items-center space-x-4">
-        <img className="w-7 h-7 rounded-full" src={avatar1} alt="Author Avatar" />
+        <img className="object-cover rounded-full w-7 h-7" src={post.userProfile} alt="Author Avatar" />
         <span className="font-medium">{post.username}</span>
         <span className="text-sm">{formatTimestamp(post.created_at)}</span>
       </div>
@@ -63,8 +63,8 @@ const BlogSection = (props) => {
   return (
     <section className="bg-white h-max">
       <MyForm />
-      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex-col flex items-center justify-center">
-        <h1 className='w-full text-center text-4xl font-bold mb-8 text-blue-700'>Today's Feed..</h1>
+      <div className="flex flex-col items-center justify-center max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
+        <h1 className='w-full mb-8 text-4xl font-bold text-center text-blue-700'>Today's Feed..</h1>
 
         <div className="w-full lg:w-1/2">
           {blogPosts.map((post) => (

@@ -7,7 +7,6 @@ import LoginSection from './pages/auth/Login.jsx';
 import BlogSection from './Components/UserPage/Home.jsx';
 import UserLayout from './UserLayout.jsx';
 import UserProfile from './Components/UserPage/UserProfile.jsx';
-import MyForm from './Components/BlogInput/BlogPost.jsx';
 import UserContextProvider from './context/userContextProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

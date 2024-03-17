@@ -24,6 +24,8 @@ def get_user_id(id: int,db:Session=Depends(get_db)):
     return user
 
 
+
+
 @router.post("/")
 def add_user(user: schemas.UserCreate,db:Session=Depends(get_db)):
     user.email=utils.hash(user.email)
@@ -54,4 +56,20 @@ def update_post(id:int,new_user: schemas.UserUpdate,db:Session=Depends(get_db)):
         db.commit()
         db.refresh(user)
         return user
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No post with the given id")
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No user with the given id")
+
+
+@router.put("/update_image/{id}", response_model=schemas.UserOut)
+async def update_image(id: int, image: schemas.UserImageUpdate, db: Session = Depends(get_db)):
+    if not image:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid image data")
+
+    user = db.query(models.User).filter(models.User.id == id).first()
+    if user:
+        print(image.imageURL)
+        user.imageURL = image.imageURL
+        db.commit()
+        db.refresh(user)
+        return user
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No user with given id")

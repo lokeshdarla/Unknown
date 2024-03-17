@@ -46,10 +46,11 @@ export default function UserProfile() {
               : ''
           }`}
           name="username"
-          value="lokesh"
+          value={user && user.username ? user.username : 'Loading...'}
           onChange={handleInputChange}
           readOnly={!isEditing}
         />
+
         <input
           type="text"
           className={`text-sm text-gray-500 mb-1 text-center outline-none m-1 ${
